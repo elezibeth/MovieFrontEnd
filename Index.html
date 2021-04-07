@@ -28,26 +28,15 @@
     <div id="movies"></div>
 
     <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" style="color:#8009f0" data-toggle="tab" href="#movies">Movies</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color:#8009f0" data-toggle="tab" href="#SearchByTitle">Title</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color:#8009f0" data-toggle="tab" href="#DisplayAllMovieInfo">Director</a>
-        
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color:#8009f0" data-toggle="tab" href="#SingleMovieDisplay">Single Movie Display</a>
-        
+ 
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Dropdown</a>
+        <a style="color:#8009f0" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Dropdown</a>
         <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Delete A Movie</a>
           <a class="dropdown-item" href="#">Change Movie</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#CreateMovie">Create a Movie</a>
+          <a class="dropdown-item" href="#SearchByTitle">Search By Title</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#UglyTextOutPut">Ugly Text Output</a>
         </div>
@@ -55,7 +44,7 @@
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade show active" id="home">
-        <p style="color: rgb(242, 245, 70)">Movie API -- no api keys available. Unfortunately.</p>
+        <p style="color: rgb(242, 245, 70)">A simple web app for the ocd to keep their movies organized.</p>
       </div>
       <div class="tab-pane fade" id="profile">
         <p></p>
@@ -96,15 +85,108 @@
             </tbody>
           </table>
     </div>
-         
-          <h1 style="color:#8009f0">Search</h1>
+
+
+   <div>
+     
+     <a id="SearchByTitle"></a> 
+          <h1 style="color:#8009f0">Search for a Movie By Title</h1>
+          
           <div class=row>
             <div class="col-md-8">
               <div class="form-group"
               <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
-              <input class="form-control form-control-lg" type="text" placeholder="Please only use letters or numbers!" id="searchText">
-              <input type="submit" value="Search" class="btn btn-outline-danger" onclick="getSearchText()"/>
+              <input class="form-control form-control-lg" type="text" placeholder="Please only use letters or numbers!" id="searchTitleText">
+              <input type="submit" value="Search" class="btn btn-outline-danger" onclick="getTitleSearchText()"/>
             </div>
+            <div>
+              <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th style="color: rgb(242, 245, 70)"scope="col">Title</th>
+                      <th style="color: rgb(242, 245, 70)"scope="col">Genre</th>
+                      <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
+                    </tr>
+                  </thead>
+                  <tbody id="titleTable">
+                  </tbody>
+                  </tbody>
+                </table>
+          </div>
+          </div>
+
+          <div>
+            <a id="CreateMovie"></a> 
+            <h1 style="color:#8009f0">Enter Movie Details</h1>
+            <div class=row>
+              <div class="col-md-8">
+                <div class="form-group"
+                <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
+                <input class="form-control form-control-lg" type="text" placeholder="Movie Title" id="newTitle">
+                <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
+                <input class="form-control form-control-lg" type="text" placeholder="Movie Genre" id="newGenre">
+                <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
+                <input class="form-control form-control-lg" type="text" placeholder="Movie Director" id="newDirector">
+                <input type="submit" value="Create" class="btn btn-outline-danger" onclick="getPostText()"/>
+              </div>
+              <div>
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th style="color: rgb(242, 245, 70)"scope="col">Title</th>
+                        <th style="color: rgb(242, 245, 70)"scope="col">Genre</th>
+                        <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
+                      </tr>
+                    </thead>
+                    <tbody id="titleTable">
+                    </tbody>
+                    </tbody>
+                  </table>
+            </div>
+
+            <div>
+              <a id="CreateMovie"></a> 
+              <h1 style="color:#8009f0">Enter Movie Details</h1>
+              <div class=row>
+                <div class="col-md-8">
+                  <div class="form-group"
+                  <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
+                  <input class="form-control form-control-lg" type="text" placeholder="Movie Index to Delete" id="movieIndexNumber">
+                  <input type="submit" value="Create" class="btn btn-outline-danger" onclick="getDeleteText()"/>
+                </div>
+                <div>
+                  <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th style="color: rgb(242, 245, 70)"scope="col">Title</th>
+                          <th style="color: rgb(242, 245, 70)"scope="col">Genre</th>
+                          <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
+                        </tr>
+                      </thead>
+                      <tbody id="titleTable">
+                      </tbody>
+                      </tbody>
+                    </table>
+              </div>
+
+
+
+
+
+
+
+          
+
+
+            <h1 style="color:#8009f0">Search IMBD for ID for Movie Poster</h1>
+            <div class=row>
+              <div class="col-md-8">
+                <div class="form-group"
+                <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
+                <input class="form-control form-control-lg" type="text" placeholder="Please only use letters or numbers!" id="searchTextForIMBD">
+                <input type="submit" value="Search" class="btn btn-outline-danger" onclick="getUrlIdforIMBD()"/>
+              </div>
+        </div>
 
              
 
@@ -140,41 +222,29 @@
 
                     <a id="SingleMovieDisplay"></a>
                      
-                      <div class="card mb-3">
-                        <h3 class="card-header">Card header</h3>
-                        <div class="card-body">
-                          <h5 class="card-title">Special title treatment</h5>
-                          <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                          <rect width="100%" height="100%" fill="#868e96"></rect>
-                          <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                        </svg>
-                        <div class="card-body">
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Cras justo odio</li>
-                          <li class="list-group-item">Dapibus ac facilisis in</li>
-                          <li class="list-group-item">Vestibulum at eros</li>
-                        </ul>
-                        <div class="card-body">
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                        <div class="card-footer text-muted">
-                          2 days ago
-                        </div>
+                     
+                
+
+
+
+                    
+
                       </div>
-                      <div class="card">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                      </div>
+                      <div>
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th style="color: rgb(242, 245, 70)"scope="col">Title</th>
+                                <th style="color: rgb(242, 245, 70)"scope="col">Genre</th>
+                                <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
+                                <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
+                              </tr>
+                            </thead>
+                            <tbody id="ImbdTable">
+                            </tbody>
+                            </tbody>
+                          </table>
+                    </div>
 
 
 

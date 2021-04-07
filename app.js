@@ -261,7 +261,7 @@ function getSearchText(){
   
   let searchInput = document.getElementById("searchText").value;
   document.getElementById('UglyTextOutPut').innerHTML = searchInput;
-  search(searchInput)
+  search(searchInput);
   
 
 }
@@ -271,13 +271,14 @@ function search(searchValue){
     type: "GET",
     dataType: "JSON",
     success: function(data){
+      
      
-     var searchResults = data;
-     var xyz = searchResults.filter(m => m.title === searchValue);
+     
+     var xyz = data.filter(m => m.title === searchValue);
    
     
 
-     makeTable(xyz);
+     makeTitleTable(xyz);
     },
     error: function (err){
       alert(err);
@@ -286,8 +287,101 @@ function search(searchValue){
     })
   
 }
+function getTitleSearchText(){
+  
+  let searchInput = document.getElementById("searchTitleText").value;
+  search(searchInput);
+  
+
+}
+function makeTitleTable(data){
+  var table = document.getElementById('titleTable');
+  var dataStringsToTable = [data];
+  for(var i = 0; i < data.length; i++){
+   
+    var row = `<tr>
+                  <tr class="table-danger">
+                  <td>${data[i].title}</td>
+                  <td>${data[i].genre}</td>
+                  <td>${data[i].directorName}</td>
+              </tr>`
+    table.innerHTML += row;
+  }
+}
+
+function getUrlIdforIMBD(){
+ 
+  
+    let searchInput = document.getElementById("searchTextForIMBD").value;
+  let str1 = searchInput.split(" ");
+  let newStr = str1.join("%");
+  
 
 
+    let urlImbd = "https://imdb-api.com/API/SearchKeyword/k_f112f1iz/" + newStr;
+    getMovieByIMBD(urlImbd);
+    
+    
+  
+  
+
+}
+function getMovieByIMBD(url){
+
+  // $("#movies").html(movieIdSt);
+  
+   $.ajax({
+    url: url,
+    type: "GET",
+    contentType: "JSON",
+     success: function(data){
+       console.log(data)
+       makeTable1(data);
+ 
+       $("#DisplayAllMovies").html(JSON.stringify(data));
+   },
+   error: function(err){
+    console.log(err);
+    prompt("Movie does not exist in database");
+   
+     }
+   })
+  
+ 
+ }
+
+
+
+function makeTable1(data){
+  var table = document.getElementById('ImbdTable');
+  var dataStringsToTable = [data];
+  for(var i = 0; i < dataStringsToTable.length; i++){
+    var row = `<tr>
+                  <tr class="table-danger">
+                  <td>${dataStringsToTable[i].id}</td>
+                  <td>${dataStringsToTable[i].resultType}</td>
+                  <td>${dataStringsToTable[i].image}</td>
+                  <td>${dataStringsToTable[i].title}</td>
+                  <td>${dataStringsToTable[i].description}</td>
+              </tr>`
+    table.innerHTML += row;
+  }
+}
+function getPostText(){
+  let movieId3 = document.getElementById("newTitle").value;
+  let movieGenre = document.getElementById("newGenre").value;
+  let movieDirector = document.getElementById("newDirector").value;
+  var moviebystringUrl3 = "https://localhost:44359/api/Movies";
+
+   var movieData3 = {
+      "id": 0,
+      "title": movieId3,
+      "genre": movieGenre,
+      "directorName": movieDirector
+    };
+
+  postNewMovie(moviebystringUrl3, movieData3);
+}
 
 
 
