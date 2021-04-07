@@ -87,19 +87,16 @@ function postNewMovie(url1, movieData1){
 function putMovie(){
   let movieId3 = prompt("Enter the index of the movie you want to view.");
   let movieTitle1 = prompt("Enter the title of your movie.");
-  let movieTitle1st = movieTitle1.toString();
   let movieGenre = prompt("Enter the genre of your movie.");
-  let movieGenreSt = movieGenre.toString();
   let movieDirector = prompt("Enter the name of the director of your movie.");
-  let movieDirecctorSt = movieDirector.toString();
   let movieIdSt3 = movieId3.toString();
   var moviebystringUrl3 = "https://localhost:44359/api/Movies/" + movieIdSt3.valueOf();
 
    var movieData3 = {
       "id": movieId3,
-      "title": movieTitle1st,
-      "genre": movieGenreSt,
-      "directorName": movieDirecctorSt
+      "title": movieTitle1,
+      "genre": movieGenre,
+      "directorName": movieDirector
     };
 
   putNewMovie(moviebystringUrl3, movieData3);
@@ -301,6 +298,7 @@ function makeTitleTable(data){
    
     var row = `<tr>
                   <tr class="table-danger">
+                  <td>${data[i].id}</td>
                   <td>${data[i].title}</td>
                   <td>${data[i].genre}</td>
                   <td>${data[i].directorName}</td>
@@ -353,16 +351,15 @@ function getMovieByIMBD(url){
 
 
 function makeTable1(data){
-  var table = document.getElementById('ImbdTable');
+  var table = document.getElementById("createTable");
   var dataStringsToTable = [data];
   for(var i = 0; i < dataStringsToTable.length; i++){
     var row = `<tr>
                   <tr class="table-danger">
                   <td>${dataStringsToTable[i].id}</td>
-                  <td>${dataStringsToTable[i].resultType}</td>
-                  <td>${dataStringsToTable[i].image}</td>
                   <td>${dataStringsToTable[i].title}</td>
-                  <td>${dataStringsToTable[i].description}</td>
+                  <td>${dataStringsToTable[i].genre}</td>
+                  <td>${dataStringsToTable[i].directorName}</td>
               </tr>`
     table.innerHTML += row;
   }
@@ -383,5 +380,66 @@ function getPostText(){
   postNewMovie(moviebystringUrl3, movieData3);
 }
 
+function getDeleteText(){
+  
+  let searchInput = document.getElementById("movieIndexNumber").value;
+  deleteMovieFromForm(searchInput);
+  
 
+}
+function deleteMovieFromForm(input){
+  let movieId3 = input;
+  let movieIdSt3 = movieId3.toString();
+  var moviebystringUrl5 = "https://localhost:44359/api/Movies/" + movieIdSt3.valueOf();
+
+   var movieData4 = {
+      "id": movieId3,
+      "title": "any",
+      "genre": "movieGenreSt",
+      "directorName": "movieDirecctorSt"
+    };
+
+  deleteAMovieFromForm(moviebystringUrl5, movieData4);
+
+}
+function deleteAMovieFromForm(moviebystringUrl5, movieData4){
+
+  $(function(){
+
+    $.ajax({
+      type: "DELETE",
+      url: moviebystringUrl5,
+      data: JSON.stringify(movieData4),
+      contentType: "application/json",
+      success: function(data){
+       alert("Success");
+      makeDeleteTable(data);
+
+
+        
+      },
+      error: function(err){
+        alert(err);
+      }
+    })
+
+ 
+  
+  })
+
+}
+function makeDeleteTable(data){
+  var table = document.getElementById('deleteTable');
+  
+  for(var i = 0; i < data.length; i++){
+   
+    var row = `<tr>
+                  <tr class="table-danger">
+                  <td>${data[i].title}</td>
+                  <td>${data[i].genre}</td>
+                  <td>${data[i].directorName}</td>
+              </tr>`
+    table.innerHTML += row;
+  }
+}
 

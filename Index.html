@@ -33,8 +33,8 @@
       <li class="nav-item dropdown">
         <a style="color:#8009f0" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Dropdown</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Delete A Movie</a>
-          <a class="dropdown-item" href="#">Change Movie</a>
+          <a class="dropdown-item" href="#DeleteMovie">Delete A Movie</a>
+          <a class="dropdown-item" href="#EditMovie">Change Movie</a>
           <a class="dropdown-item" href="#CreateMovie">Create a Movie</a>
           <a class="dropdown-item" href="#SearchByTitle">Search By Title</a>
           <div class="dropdown-divider"></div>
@@ -67,7 +67,7 @@
    
       <button type="button" onclick="getAllMovies()" class="btn btn-outline-danger">All Movies</button>
    
-      <button type="button" onclick="testgetAllMovies()" class="btn btn-outline-danger">All Movies test</button>
+   
      </div>
    
 
@@ -103,6 +103,7 @@
               <table class="table table-hover">
                   <thead>
                     <tr>
+                      <th style="color: rgb(242, 245, 70)"scope="col">Index</th>
                       <th style="color: rgb(242, 245, 70)"scope="col">Title</th>
                       <th style="color: rgb(242, 245, 70)"scope="col">Genre</th>
                       <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
@@ -115,7 +116,8 @@
           </div>
           </div>
 
-          <div>
+          <div class=row>
+            <div class="col-md-8">
             <a id="CreateMovie"></a> 
             <h1 style="color:#8009f0">Enter Movie Details</h1>
             <div class=row>
@@ -129,30 +131,36 @@
                 <input class="form-control form-control-lg" type="text" placeholder="Movie Director" id="newDirector">
                 <input type="submit" value="Create" class="btn btn-outline-danger" onclick="getPostText()"/>
               </div>
+              </div>
+            </div>
+           </div>
               <div>
                 <table class="table table-hover">
                     <thead>
                       <tr>
+                        <th style="color: rgb(242, 245, 70)"scope="col">Index</th>
                         <th style="color: rgb(242, 245, 70)"scope="col">Title</th>
                         <th style="color: rgb(242, 245, 70)"scope="col">Genre</th>
                         <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
                       </tr>
                     </thead>
-                    <tbody id="titleTable">
+                    <tbody id="createTable">
                     </tbody>
                     </tbody>
                   </table>
             </div>
+            </div>
 
             <div>
-              <a id="CreateMovie"></a> 
-              <h1 style="color:#8009f0">Enter Movie Details</h1>
+              <div class="col-md-8">
+              <a id="DeleteMovie"></a> 
+              <h1 style="color:#8009f0">Enter Movie Index Number</h1>
               <div class=row>
                 <div class="col-md-8">
                   <div class="form-group"
                   <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
                   <input class="form-control form-control-lg" type="text" placeholder="Movie Index to Delete" id="movieIndexNumber">
-                  <input type="submit" value="Create" class="btn btn-outline-danger" onclick="getDeleteText()"/>
+                  <input type="submit" value="Delete : Cannot be Undone." class="btn btn-outline-danger" onclick="getDeleteText()"/>
                 </div>
                 <div>
                   <table class="table table-hover">
@@ -163,32 +171,49 @@
                           <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
                         </tr>
                       </thead>
-                      <tbody id="titleTable">
+                      <tbody id="deleteTable">
                       </tbody>
                       </tbody>
                     </table>
               </div>
-
-
-
-
-
-
-
-          
-
-
-            <h1 style="color:#8009f0">Search IMBD for ID for Movie Poster</h1>
-            <div class=row>
-              <div class="col-md-8">
-                <div class="form-group"
-                <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
-                <input class="form-control form-control-lg" type="text" placeholder="Please only use letters or numbers!" id="searchTextForIMBD">
-                <input type="submit" value="Search" class="btn btn-outline-danger" onclick="getUrlIdforIMBD()"/>
               </div>
-        </div>
 
-             
+              <div class=row>
+                <div class="col-md-8">
+                <a id="EditMovie"></a> 
+                <h1 style="color:#8009f0">Edit Movie Details</h1>
+                <div class=row>
+                  <div class="col-md-8">
+                    <div class="form-group"
+                    <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
+                    <input class="form-control form-control-lg" type="text" placeholder="Movie Title" id="editedTitle">
+                    <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
+                    <input class="form-control form-control-lg" type="text" placeholder="Movie Genre" id="editedGenre">
+                    <label class="col-form-label col-form-label-lg" for="inputLarge"></label>
+                    <input class="form-control form-control-lg" type="text" placeholder="Movie Director" id="editedDirector">
+                    <input type="submit" value="Create" class="btn btn-outline-danger" onclick="getEditText()"/>
+                  </div>
+                  </div>
+                </div>
+               </div>
+                  <div>
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th style="color: rgb(242, 245, 70)"scope="col">Index</th>
+                            <th style="color: rgb(242, 245, 70)"scope="col">Title</th>
+                            <th style="color: rgb(242, 245, 70)"scope="col">Genre</th>
+                            <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
+                          </tr>
+                        </thead>
+                        <tbody id="editedTable">
+                        </tbody>
+                        </tbody>
+                      </table>
+                </div>
+                </div>
+
+
 
 
            
@@ -234,7 +259,7 @@
                         <table class="table table-hover">
                             <thead>
                               <tr>
-                                <th style="color: rgb(242, 245, 70)"scope="col">Title</th>
+                                <th style="color: rgb(242, 245, 70)"scope="col">Index</th>
                                 <th style="color: rgb(242, 245, 70)"scope="col">Genre</th>
                                 <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
                                 <th style="color: rgb(242, 245, 70)"scope="col">Director</th>
